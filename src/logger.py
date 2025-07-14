@@ -1,17 +1,18 @@
-# logger.py
 import logging
+import os
+
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+
+log_file_path = os.path.join(log_dir, "insightx.log")
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+    handlers=[
+        logging.FileHandler(log_file_path),
+        logging.StreamHandler()
+    ]
 )
 
 logger = logging.getLogger(__name__)
-
-# # Testing logger
-# logger.info("InsightX Starting....")
-# logger.debug("This is a DEBUG message (won't show unless level is DEBUG)")
-# logger.info("This is an INFO message")
-# logger.warning("This is a WARNING message")
-# logger.error("This is an ERROR message")
-# logger.critical("This is a CRITICAL message")
